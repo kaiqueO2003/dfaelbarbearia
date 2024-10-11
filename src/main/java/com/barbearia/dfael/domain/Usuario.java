@@ -32,6 +32,12 @@ public class Usuario implements UserDetails {
         this.password = password;
         this.role = role;
     }
+    public Usuario(String name, String email, String password, UsuarioRole role) {this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
     public String getId() {
         return id;
