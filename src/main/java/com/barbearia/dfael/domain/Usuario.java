@@ -22,6 +22,10 @@ public class Usuario implements UserDetails {
     private String password;
     private UsuarioRole role;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<Agendamento> agendamentos;
+
+
     public Usuario(){
 
     }

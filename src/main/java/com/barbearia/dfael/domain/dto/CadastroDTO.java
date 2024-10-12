@@ -1,4 +1,4 @@
-package com.barbearia.dfael.domain;
+package com.barbearia.dfael.domain.dto;
 
 import com.barbearia.dfael.domain.enums.UsuarioRole;
 

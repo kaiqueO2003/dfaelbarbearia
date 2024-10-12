@@ -16,6 +16,10 @@ public class Agendamento implements Serializable {
     private Date hora;
     private StatusAgendamento status;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
     public Agendamento(){
 
     }

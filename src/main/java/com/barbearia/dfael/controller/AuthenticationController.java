@@ -1,8 +1,8 @@
 package com.barbearia.dfael.controller;
 
-import com.barbearia.dfael.domain.AuthenticationDTO;
-import com.barbearia.dfael.domain.CadastroDTO;
-import com.barbearia.dfael.domain.LoginResponseDTO;
+import com.barbearia.dfael.domain.dto.AuthenticationDTO;
+import com.barbearia.dfael.domain.dto.CadastroDTO;
+import com.barbearia.dfael.domain.dto.LoginResponseDTO;
 import com.barbearia.dfael.domain.Usuario;
 import com.barbearia.dfael.infra.security.TokenService;
 import com.barbearia.dfael.repository.UsuarioRepository;
