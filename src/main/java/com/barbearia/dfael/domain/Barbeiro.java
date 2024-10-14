@@ -1,46 +1,28 @@
 package com.barbearia.dfael.domain;
 
+import com.barbearia.dfael.domain.enums.UsuarioRole;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name ="barbeiros")
-public class Barbeiro implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idBarbeiro;
-    private String nome;
+@Table(name = "barbeiros")
+public class Barbeiro extends Usuario implements Serializable {
     private String especialidades;
-    private String telefone;
+    private String disponibilidade;
+    private Double avaliacaClientes;
 
 
-    public Barbeiro(){
+    public Barbeiro() {
 
     }
 
-    public Barbeiro(Long idBarbeiro, String nome, String especialidades, String telefone) {
-        this.idBarbeiro = idBarbeiro;
-        this.nome = nome;
+    public Barbeiro(String id, String name, String email, String password, UsuarioRole role, String especialidades, String disponibilidade, Double avaliacaClientes) {
+        super(id, name, email, password, role);
         this.especialidades = especialidades;
-        this.telefone = telefone;
-    }
-
-    public Long getIdBarbeiro() {
-        return idBarbeiro;
-    }
-
-    public void setIdBarbeiro(Long idBarbeiro) {
-        this.idBarbeiro = idBarbeiro;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+        this.disponibilidade = disponibilidade;
+        this.avaliacaClientes = avaliacaClientes;
     }
 
     public String getEspecialidades() {
@@ -51,25 +33,22 @@ public class Barbeiro implements Serializable {
         this.especialidades = especialidades;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getDisponibilidade() {
+        return disponibilidade;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setDisponibilidade(String disponibilidade) {
+        this.disponibilidade = disponibilidade;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Barbeiro barbeiro = (Barbeiro) o;
-        return Objects.equals(idBarbeiro, barbeiro.idBarbeiro);
+    public Double getAvaliacaClientes() {
+        return avaliacaClientes;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(idBarbeiro);
+    public void setAvaliacaClientes(Double avaliacaClientes) {
+        this.avaliacaClientes = avaliacaClientes;
     }
 }
+
+
 

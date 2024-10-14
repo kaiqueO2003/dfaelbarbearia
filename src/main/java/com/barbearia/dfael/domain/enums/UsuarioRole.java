@@ -3,6 +3,8 @@ package com.barbearia.dfael.domain.enums;
 public enum UsuarioRole {
     ADMIN("admin"),
 
+    BARBEIRO ("barbeiro"),
+
     USUARIO ("usuario");
 
     private String role;

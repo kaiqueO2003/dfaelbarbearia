@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name ="usuarios")
 public class Usuario implements UserDetails {
     @Id

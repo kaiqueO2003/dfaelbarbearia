@@ -38,7 +38,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/cadastro")
-    public ResponseEntity cadastro(@RequestBody @Valid CadastroDTO data){
+    public ResponseEntity <Usuario> cadastro(@RequestBody @Valid CadastroDTO data){
         if(this.repository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
 
         String enccryptedPassword = new BCryptPasswordEncoder().encode(data.password());
