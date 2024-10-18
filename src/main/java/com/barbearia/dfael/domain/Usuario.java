@@ -26,6 +26,12 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "usuario")
     private List<Agendamento> agendamentos;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<HistoricoAgendamento> historicoAgendamentos;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Notificacao> notificacaos;
+
 
     public Usuario(){
 
@@ -43,6 +49,12 @@ public class Usuario implements UserDetails {
         this.password = password;
         this.role = role;
     }
+    public Usuario(String id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
 
     public String getId() {
         return id;

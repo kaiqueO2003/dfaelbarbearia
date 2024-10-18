@@ -1,30 +1,44 @@
 package com.barbearia.dfael.domain;
 
 import com.barbearia.dfael.domain.enums.StatusAgendamento;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-
+@Entity
 public class HistoricoAgendamento implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idHistorico;
     private Date dataHora;
     private StatusAgendamento status;
+
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "barbeiro_id")
     private Barbeiro barbeiro;
+
+    @ManyToOne
+    @JoinColumn(name = "servico_id")
     private Servico servico;
-    private Usuario cliente;
+
 
     public HistoricoAgendamento(){
 
     }
 
-    public HistoricoAgendamento(Long idHistorico, Date dataHora, StatusAgendamento status, Barbeiro barbeiro, Servico servico, Usuario cliente) {
+    public HistoricoAgendamento(Long idHistorico, Date dataHora, StatusAgendamento status, Barbeiro barbeiro, Servico servico, Usuario usuario) {
         this.idHistorico = idHistorico;
         this.dataHora = dataHora;
         this.status = status;
         this.barbeiro = barbeiro;
         this.servico = servico;
-        this.cliente = cliente;
+        this.usuario = usuario;
     }
 
     public Long getIdHistorico() {
@@ -67,12 +81,12 @@ public class HistoricoAgendamento implements Serializable {
         this.servico = servico;
     }
 
-    public Usuario getCliente() {
-        return cliente;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setCliente(Usuario cliente) {
-        this.cliente = cliente;
+    public void setCliente(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

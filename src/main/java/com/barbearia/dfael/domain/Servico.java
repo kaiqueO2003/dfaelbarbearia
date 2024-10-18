@@ -1,9 +1,16 @@
 package com.barbearia.dfael.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.io.Serializable;
 import java.util.Objects;
-
+@Entity
 public class Servico implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idServico;
     private String nomeServico;
     private Integer duracao;

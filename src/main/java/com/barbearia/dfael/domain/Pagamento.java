@@ -1,12 +1,19 @@
 package com.barbearia.dfael.domain;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
-
+@Entity
 public class Pagamento implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPagamento;
     private Double valorTotal;
     private String metodoPagamemto;
+
+    @OneToOne(mappedBy = "pagamento")
+    private Agendamento agendamento;
 
     public Pagamento(){
 

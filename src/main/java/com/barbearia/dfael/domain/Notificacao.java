@@ -1,13 +1,25 @@
 package com.barbearia.dfael.domain;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-
+@Entity
 public class Notificacao implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idNotificacao;
     private String mensagem;
     private Date dataHoraEnvio;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "barbeiro_id")
+    private Barbeiro barbeiro;
 
     public Notificacao(){
 

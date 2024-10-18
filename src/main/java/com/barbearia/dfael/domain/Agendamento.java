@@ -1,6 +1,7 @@
 package com.barbearia.dfael.domain;
 
 import com.barbearia.dfael.domain.enums.StatusAgendamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,6 +20,16 @@ public class Agendamento implements Serializable {
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "barbeiro_id")
+    private Barbeiro barbeiro;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Pagamento pagamento;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Servico servico;
 
     public Agendamento(){
 
@@ -52,6 +63,7 @@ public class Agendamento implements Serializable {
     public void setStatus(StatusAgendamento status) {
         this.status = status;
     }
+
 
     @Override
     public boolean equals(Object o) {

@@ -4,6 +4,7 @@ import com.barbearia.dfael.domain.enums.UsuarioRole;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +14,11 @@ public class Barbeiro extends Usuario implements Serializable {
     private String disponibilidade;
     private Double avaliacaClientes;
 
+    @OneToMany(mappedBy = "barbeiro")
+    private List<Agendamento> agendamentos;
+
+    @OneToMany(mappedBy = "barbeiro")
+    private List<HistoricoAgendamento> historicoAgendamentos;
 
     public Barbeiro() {
 
