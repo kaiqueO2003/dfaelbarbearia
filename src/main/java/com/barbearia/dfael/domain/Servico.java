@@ -1,11 +1,9 @@
 package com.barbearia.dfael.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 @Entity
 public class Servico implements Serializable {
@@ -15,6 +13,9 @@ public class Servico implements Serializable {
     private String nomeServico;
     private Integer duracao;
     private Double preco;
+
+    @OneToMany(mappedBy = "servico")
+    private List<Agendamento> agendamentos;
 
     public Servico(){
 

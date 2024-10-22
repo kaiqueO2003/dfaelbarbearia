@@ -14,6 +14,7 @@ public class Barbeiro extends Usuario implements Serializable {
     private String disponibilidade;
     private Double avaliacaClientes;
 
+
     @OneToMany(mappedBy = "barbeiro")
     private List<Agendamento> agendamentos;
 
@@ -29,6 +30,11 @@ public class Barbeiro extends Usuario implements Serializable {
         this.especialidades = especialidades;
         this.disponibilidade = disponibilidade;
         this.avaliacaClientes = avaliacaClientes;
+    }
+
+    public Barbeiro(String id, String name, String email, String especialidades) {
+        super(id, name, email);
+        this.especialidades = especialidades;
     }
 
     public String getEspecialidades() {

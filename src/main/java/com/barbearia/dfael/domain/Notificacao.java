@@ -20,7 +20,6 @@ public class Notificacao implements Serializable {
     @ManyToOne
     @JoinColumn(name = "barbeiro_id")
     private Barbeiro barbeiro;
-
     public Notificacao(){
 
     }

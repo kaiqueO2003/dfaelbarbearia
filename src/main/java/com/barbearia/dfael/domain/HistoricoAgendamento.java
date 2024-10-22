@@ -28,6 +28,9 @@ public class HistoricoAgendamento implements Serializable {
     private Servico servico;
 
 
+
+
+
     public HistoricoAgendamento(){
 
     }

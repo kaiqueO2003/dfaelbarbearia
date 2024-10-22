@@ -1,34 +1,34 @@
 package com.barbearia.dfael.controller;
 
-
 import com.barbearia.dfael.domain.Agendamento;
+import com.barbearia.dfael.domain.Servico;
 import com.barbearia.dfael.service.AgendamentoService;
+import com.barbearia.dfael.service.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
-@RequestMapping(value = "/agendamentos")
-public class AgendamentoController {
+@RequestMapping(value = "/servicos")
+public class ServicoController {
 
     @Autowired
-    AgendamentoService service;
-
+    ServicoService service;
     @GetMapping
-    public ResponseEntity<List<Agendamento>> findAll(){
-        List<Agendamento> list= service.findAll();
+    public ResponseEntity<List<Servico>> findAll(){
+        List<Servico> list= service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Agendamento> findById(@PathVariable String id){
-        Agendamento obj = service.findByid(id);
+    public ResponseEntity<Servico> findById(@PathVariable String id){
+        Servico obj = service.findByid(id);
         return ResponseEntity.ok().body(obj);
     }
     @PostMapping
-    public ResponseEntity<Agendamento> insert(@RequestBody Agendamento obj) {
+    public ResponseEntity<Servico> insert(@RequestBody Servico obj) {
         obj = service.insert(obj);
         return ResponseEntity.ok().body(obj);
     }

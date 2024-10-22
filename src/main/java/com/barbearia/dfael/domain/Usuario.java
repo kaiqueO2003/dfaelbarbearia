@@ -33,6 +33,7 @@ public class Usuario implements UserDetails {
     private List<Notificacao> notificacaos;
 
 
+
     public Usuario(){
 
     }

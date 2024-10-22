@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -30,6 +31,8 @@ public class Agendamento implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Servico servico;
+
+
 
     public Agendamento(){
 
@@ -62,6 +65,29 @@ public class Agendamento implements Serializable {
 
     public void setStatus(StatusAgendamento status) {
         this.status = status;
+    }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Barbeiro getBarbeiro() {
+        return barbeiro;
+    }
+
+    public void setBarbeiro(Barbeiro barbeiro) {
+        this.barbeiro = barbeiro;
+    }
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 
 
