@@ -22,7 +22,7 @@ import java.util.TimeZone;
 import static com.barbearia.dfael.domain.enums.UsuarioRole.*;
 
 @Configuration
-public class Instantion implements CommandLineRunner {
+public class  Instantion implements CommandLineRunner {
     @Autowired
     UsuarioRepository usuarioRepository;
     @Autowired
@@ -37,18 +37,27 @@ public class Instantion implements CommandLineRunner {
     public void run(String... args) throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-        Usuario kaique = new Usuario("null","Kaique", "kaique@gmail.com", "123",ADMIN);
-        Usuario ana = new Usuario("null","ana", "ana@gmail.com", "123", USUARIO);
+        // Criando usuários
+        Usuario kaique = new Usuario(null, "Kaique", "kaique@gmail.com", "123", ADMIN);
+        Usuario ana = new Usuario(null, "Ana", "ana@gmail.com", "123", USUARIO);
 
         usuarioRepository.saveAll(Arrays.asList(kaique, ana));
 
-        Barbeiro ryan = new Barbeiro("null", "Ryan", "ryan@gmail.com", "123", BARBEIRO, "barba e cabelo", "qualquer horario", 5.0);
-        Usuario lucas = new Barbeiro("null", "Lucas", "lucas@gmail.com", "123", BARBEIRO, "barba", "qualquer horario", 5.0);
-        usuarioRepository.saveAll(Arrays.asList(ryan,lucas ));
+        // Criando barbeiros
+        Barbeiro ryan = new Barbeiro(null, "Ryan", "ryan@gmail.com", "123", BARBEIRO, "barba e cabelo", "qualquer horario", 5.0);
+        Barbeiro lucas = new Barbeiro(null, "Lucas", "lucas@gmail.com", "123", BARBEIRO, "barba", "qualquer horario", 5.0);
 
-        Servico cabelo = new Servico(null, "cabelo", 30, 40.00 );
-        servicoRepository.saveAll(Arrays.asList(cabelo ));
+        barbeiroRepository.saveAll(Arrays.asList(ryan, lucas));
 
+        // Criando serviços
+        Servico cabelo = new Servico(null, "cabelo", 30, 40.00);
+        servicoRepository.save(cabelo);
+
+        // Criando agendamento e associando usuario, barbeiro e servico
+        Agendamento agendamento1 = new Agendamento(null, kaique, ryan, cabelo, Date.from(Instant.now()), StatusAgendamento.PENDENTE);
+
+        // Salvando agendamento
+        agendamentoRepository.save(agendamento1);
 
     }
 

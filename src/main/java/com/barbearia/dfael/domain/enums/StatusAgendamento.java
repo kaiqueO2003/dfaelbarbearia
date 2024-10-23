@@ -3,6 +3,7 @@ package com.barbearia.dfael.domain.enums;
 public enum StatusAgendamento {
     CONFIRMADO("confirmado"),
     CANCELADO ("cancelado"),
+    PENDENTE ("pendente"),
     REALIZADO ("realizado");
 
     private String status;

@@ -14,8 +14,9 @@ public class Servico implements Serializable {
     private Integer duracao;
     private Double preco;
 
-    @OneToMany(mappedBy = "servico")
+    @OneToMany(mappedBy = "servico", cascade = CascadeType.ALL, fetch = FetchType.LAZY)  // Adicionado fetch e cascade
     private List<Agendamento> agendamentos;
+
 
     public Servico(){
 

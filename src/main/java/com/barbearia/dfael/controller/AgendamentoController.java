@@ -32,4 +32,14 @@ public class AgendamentoController {
         obj = service.insert(obj);
         return ResponseEntity.ok().body(obj);
     }
+    @PutMapping("/confirmar/{id}")
+    public ResponseEntity <Agendamento> confirmarAgendamento(@PathVariable String id){
+        Agendamento agendamentoConfirmado = service.confirmarAgendamento(id);
+        return ResponseEntity.ok(agendamentoConfirmado);
+    }
+    @PutMapping("/cancelar/{id}")
+    public ResponseEntity<Void> cancelarAgendamento(@PathVariable String id){
+        service.cancelarAgendamento(id);
+        return ResponseEntity.noContent().build();
+    }
 }

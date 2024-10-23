@@ -10,12 +10,15 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name ="agendamentos")
+@Table(name = "agendamentos")
 public class Agendamento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAgendamento;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date hora;
+
+
     private StatusAgendamento status;
 
     @ManyToOne
@@ -29,19 +32,32 @@ public class Agendamento implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private Pagamento pagamento;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "servico_id")
     private Servico servico;
+
 
 
 
     public Agendamento(){
 
     }
+
     public Agendamento(Long idAgendamento, Date hora, StatusAgendamento status) {
         this.idAgendamento = idAgendamento;
         this.hora = hora;
         this.status = status;
     }
+
+    public Agendamento(Long idAgendamento, Usuario usuario, Barbeiro barbeiro, Servico servico, Date hora, StatusAgendamento status) {
+        this.idAgendamento = idAgendamento;
+        this.usuario = usuario;
+        this.barbeiro = barbeiro;
+        this.servico = servico;
+        this.hora = hora;
+        this.status = status;
+    }
+
 
     public Long getIdAgendamento() {
         return idAgendamento;
@@ -49,6 +65,14 @@ public class Agendamento implements Serializable {
 
     public void setIdAgendamento(Long idAgendamento) {
         this.idAgendamento = idAgendamento;
+    }
+
+    public Servico getServico() {
+        return servico;
+    }
+
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 
     public Date getHora() {
