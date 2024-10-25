@@ -44,6 +44,6 @@ public class BarbeiroController {
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
-
     }
+
 }

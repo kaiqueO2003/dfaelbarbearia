@@ -55,10 +55,12 @@ public class  Instantion implements CommandLineRunner {
 
         // Criando agendamento e associando usuario, barbeiro e servico
         Agendamento agendamento1 = new Agendamento(null, kaique, ryan, cabelo, Date.from(Instant.now()), StatusAgendamento.PENDENTE);
+        Agendamento agendamento2 = new Agendamento(null, ana, lucas, cabelo, Date.from(Instant.now()), StatusAgendamento.PENDENTE);
+        Agendamento agendamento3 = new Agendamento(null, kaique, lucas, cabelo, Date.from(Instant.now()), StatusAgendamento.PENDENTE);
+
 
         // Salvando agendamento
-        agendamentoRepository.save(agendamento1);
-
+        agendamentoRepository.saveAll(Arrays.asList(agendamento1, agendamento2, agendamento3));
     }
 
 }
