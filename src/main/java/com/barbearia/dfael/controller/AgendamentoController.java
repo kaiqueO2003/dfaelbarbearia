@@ -5,6 +5,7 @@ import com.barbearia.dfael.domain.Agendamento;
 import com.barbearia.dfael.domain.Barbeiro;
 import com.barbearia.dfael.domain.dto.AgendamentoDTO;
 import com.barbearia.dfael.domain.dto.BarbeiroDTO;
+import com.barbearia.dfael.domain.enums.StatusAgendamento;
 import com.barbearia.dfael.service.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,18 @@ public class AgendamentoController {
     public ResponseEntity<Agendamento> insert(@RequestBody Agendamento obj) {
         obj = service.insert(obj);
         return ResponseEntity.ok().body(obj);
+    }
+    @PutMapping("/confirmar/{id}")
+    public ResponseEntity<AgendamentoDTO> confirmarAgendamento(@PathVariable String id) {
+        Agendamento agendamentoConfirmado = service.confirmarAgendamento(id);
+        AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamentoConfirmado);
+        return ResponseEntity.ok().body(agendamentoDTO);
+    }
+    @PutMapping("/cancelar/{id}")
+    public ResponseEntity<AgendamentoDTO> cancelarAgendamento(@PathVariable String id) {
+        Agendamento agendamentoCancelado = service.cancelarAgendamento(id);
+        AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamentoCancelado);
+        return ResponseEntity.ok().body(agendamentoDTO);
     }
 
     @PutMapping("/solicitar")
