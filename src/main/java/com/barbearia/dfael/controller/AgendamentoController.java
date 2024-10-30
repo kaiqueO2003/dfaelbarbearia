@@ -37,9 +37,9 @@ public class AgendamentoController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Agendamento> findById(@PathVariable String id) {
+    public ResponseEntity<AgendamentoDTO> findById(@PathVariable String id) {
         Agendamento obj = service.findByid(id);
-        return ResponseEntity.ok().body(obj);
+        return ResponseEntity.ok().body(new AgendamentoDTO(obj));
     }
 
     @PostMapping
@@ -62,6 +62,9 @@ public class AgendamentoController {
     public ResponseEntity<AgendamentoDTO> cancelarAgendamento(@PathVariable String id) {
         Agendamento agendamentoCancelado = service.cancelarAgendamento(id);
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamentoCancelado);
+        String usuarioTelefone = agendamentoCancelado.getUsuario().getTelefone();
+        String mensagem = "Seu agendamento foi confirmado para " + agendamentoCancelado.getHora();
+        notificacaoService.enviarNotificacao(usuarioTelefone, mensagem);
         return ResponseEntity.ok().body(agendamentoDTO);
     }
 

@@ -1,12 +1,10 @@
 package com.barbearia.dfael.service;
 
 import com.barbearia.dfael.domain.Agendamento;
-import com.barbearia.dfael.domain.Barbeiro;
 import com.barbearia.dfael.domain.dto.AgendamentoDTO;
 import com.barbearia.dfael.domain.enums.StatusAgendamento;
-import com.barbearia.dfael.exception.ResourceNotFoundException;
+import com.barbearia.dfael.service.exception.ResourceNotFoundException;
 import com.barbearia.dfael.repository.AgendamentoRepository;
-import com.barbearia.dfael.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +28,7 @@ public class AgendamentoService {
     }
     public Agendamento findByid(String id){
         Optional<Agendamento> obj = repo.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException("Agendamento não encontrado com o id: " + id));
     }
     public Agendamento confirmarAgendamento(String id){
         Agendamento agendamento = repo.findById(id)

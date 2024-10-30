@@ -1,4 +1,4 @@
-package com.barbearia.dfael.exception;
+package com.barbearia.dfael.service.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
     private static final long serialVersionUID = 1L;
