@@ -12,9 +12,9 @@ public class AgendamentoDTO {
     private Long idAgendamento;
     private Date hora;
     private StatusAgendamento statusAgendamento;
-    private String nomeUsuario;
-    private String nomeBarbeiro;
-    private String tipoServico;
+    private UsuarioDTO usuario;
+    private BarbeiroDTO barbeiro;
+    private ServicoDTO servico;
 
 
     public AgendamentoDTO(){
@@ -25,9 +25,9 @@ public class AgendamentoDTO {
         idAgendamento = obj.getIdAgendamento();
         hora = obj.getHora();
         statusAgendamento = obj.getStatus();
-        nomeUsuario = (obj.getUsuario()!= null) ? obj.getUsuario().getName() : null;
-        nomeBarbeiro = (obj.getBarbeiro()!= null) ? obj.getBarbeiro().getName() : null;
-        tipoServico = (obj.getServico()!= null) ? obj.getServico().getNomeServico() : null;
+        this.usuario = (obj.getUsuario() != null) ? new UsuarioDTO(obj.getUsuario()) : null;
+        this.barbeiro = (obj.getBarbeiro() != null) ? new BarbeiroDTO(obj.getBarbeiro()) : null;
+        this.servico = (obj.getServico() != null) ? new ServicoDTO(obj.getServico()) : null;
 
     }
 
@@ -55,29 +55,27 @@ public class AgendamentoDTO {
         this.statusAgendamento = statusAgendamento;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public UsuarioDTO getUsuario() {
+        return usuario;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
     }
 
-    public String getNomeBarbeiro() {
-        return nomeBarbeiro;
+    public BarbeiroDTO getBarbeiro() {
+        return barbeiro;
     }
 
-    public void setNomeBarbeiro(String nomeBarbeiro) {
-        this.nomeBarbeiro = nomeBarbeiro;
+    public void setBarbeiro(BarbeiroDTO barbeiro) {
+        this.barbeiro = barbeiro;
     }
 
-    public String getTipoServico() {
-        return tipoServico;
+    public ServicoDTO getServico() {
+        return servico;
     }
 
-    public void setTipoServico(String tipoServico) {
-        this.tipoServico = tipoServico;
+    public void setServico(ServicoDTO servico) {
+        this.servico = servico;
     }
-
-
 }

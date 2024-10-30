@@ -3,10 +3,13 @@ package com.barbearia.dfael.controller;
 
 import com.barbearia.dfael.domain.Agendamento;
 import com.barbearia.dfael.domain.Barbeiro;
+import com.barbearia.dfael.domain.Usuario;
 import com.barbearia.dfael.domain.dto.AgendamentoDTO;
 import com.barbearia.dfael.domain.dto.BarbeiroDTO;
 import com.barbearia.dfael.domain.enums.StatusAgendamento;
+import com.barbearia.dfael.repository.UsuarioRepository;
 import com.barbearia.dfael.service.AgendamentoService;
+import com.barbearia.dfael.service.NotificacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,11 @@ public class AgendamentoController {
 
     @Autowired
     AgendamentoService service;
+
+    @Autowired
+    NotificacaoService notificacaoService;
+
+
 
     @GetMapping
     public ResponseEntity<List<AgendamentoDTO>> findAll() {
@@ -43,7 +51,12 @@ public class AgendamentoController {
     public ResponseEntity<AgendamentoDTO> confirmarAgendamento(@PathVariable String id) {
         Agendamento agendamentoConfirmado = service.confirmarAgendamento(id);
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamentoConfirmado);
+
+        String usuarioTelefone = agendamentoConfirmado.getUsuario().getTelefone();
+        String mensagem = "Seu agendamento foi confirmado para " + agendamentoConfirmado.getHora();
+        notificacaoService.enviarNotificacao(usuarioTelefone, mensagem);
         return ResponseEntity.ok().body(agendamentoDTO);
+
     }
     @PutMapping("/cancelar/{id}")
     public ResponseEntity<AgendamentoDTO> cancelarAgendamento(@PathVariable String id) {

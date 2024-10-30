@@ -1,14 +1,14 @@
 package com.barbearia.dfael.domain.dto;
 
 import com.barbearia.dfael.domain.Usuario;
-import com.barbearia.dfael.domain.enums.UsuarioRole;
+
 
     public class UsuarioDTO {
     private String id;
     private String name;
     private String email;
 
-    private UsuarioRole role;
+
 
     public UsuarioDTO(){
 
@@ -18,7 +18,6 @@ import com.barbearia.dfael.domain.enums.UsuarioRole;
             id = obj.getId();
             name = obj.getName();
             email = obj.getEmail();
-            role = obj.getRole();
         }
 
         public String getId() {
@@ -46,11 +45,5 @@ import com.barbearia.dfael.domain.enums.UsuarioRole;
         }
 
 
-        public UsuarioRole getRole() {
-            return role;
-        }
 
-        public void setRole(UsuarioRole role) {
-            this.role = role;
-        }
     }

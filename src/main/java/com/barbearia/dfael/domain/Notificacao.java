@@ -6,12 +6,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 @Entity
+@Table(name = "notificacoes")
 public class Notificacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idNotificacao;
     private String mensagem;
     private Date dataHoraEnvio;
+
+
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
@@ -21,6 +24,15 @@ public class Notificacao implements Serializable {
     @JoinColumn(name = "barbeiro_id")
     private Barbeiro barbeiro;
     public Notificacao(){
+
+    }
+
+    public Notificacao(Long idNotificacao, String mensagem, Date dataHoraEnvio, Usuario usuario, Barbeiro barbeiro) {
+        this.idNotificacao = idNotificacao;
+        this.mensagem = mensagem;
+        this.dataHoraEnvio = dataHoraEnvio;
+        this.usuario = usuario;
+        this.barbeiro = barbeiro;
 
     }
 
@@ -52,6 +64,22 @@ public class Notificacao implements Serializable {
 
     public void setDataHoraEnvio(Date dataHoraEnvio) {
         this.dataHoraEnvio = dataHoraEnvio;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Barbeiro getBarbeiro() {
+        return barbeiro;
+    }
+
+    public void setBarbeiro(Barbeiro barbeiro) {
+        this.barbeiro = barbeiro;
     }
 
     @Override

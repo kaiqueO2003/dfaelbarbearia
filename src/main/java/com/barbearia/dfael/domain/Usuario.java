@@ -19,6 +19,7 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String name;
+    private String telefone;
     private String email;
     private String password;
     private UsuarioRole role;
@@ -37,6 +38,16 @@ public class Usuario implements UserDetails {
     public Usuario(){
 
     }
+
+    public Usuario(String id, String name, String telefone, String email, String password, UsuarioRole role) {
+        this.id = id;
+        this.name = name;
+        this.telefone = telefone;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     public Usuario(String id, String name, String email, String password, UsuarioRole role) {
         this.id = id;
         this.name = name;
@@ -79,6 +90,14 @@ public class Usuario implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     @Override
