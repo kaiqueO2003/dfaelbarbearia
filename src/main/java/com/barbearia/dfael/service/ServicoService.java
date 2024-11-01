@@ -21,7 +21,7 @@ public class ServicoService {
     public List<Servico> findAll(){
         return repo.findAll();
     }
-    public Servico findByid(String id){
+    public Servico findByid(Long id){
         Optional<Servico> obj = repo.findById(id);
         return obj.get();
     }

@@ -1,11 +1,19 @@
 package com.barbearia.dfael.service;
 
 import com.barbearia.dfael.domain.Agendamento;
+import com.barbearia.dfael.domain.Barbeiro;
+import com.barbearia.dfael.domain.Servico;
+import com.barbearia.dfael.domain.Usuario;
 import com.barbearia.dfael.domain.dto.AgendamentoDTO;
 import com.barbearia.dfael.domain.enums.StatusAgendamento;
+import com.barbearia.dfael.repository.BarbeiroRepository;
+import com.barbearia.dfael.repository.ServicoRepository;
+import com.barbearia.dfael.repository.UsuarioRepository;
+import com.barbearia.dfael.service.exception.DatabaseException;
 import com.barbearia.dfael.service.exception.ResourceNotFoundException;
 import com.barbearia.dfael.repository.AgendamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +24,23 @@ import java.util.stream.Collectors;
 public class AgendamentoService {
     @Autowired
     AgendamentoRepository repo;
+    @Autowired
+    ServicoRepository servicoRepository;
+    @Autowired
+    UsuarioRepository usuarioRepository;
+    @Autowired
+    BarbeiroRepository barbeiroRepository;
 
 
 
     public Agendamento insert(Agendamento obj){
-        return repo.save(obj);
+        try {
+            return repo.save(obj);
+        }
+        catch (DataIntegrityViolationException e){
+            throw new DatabaseException("erro ao inserir agendamento"+ e.getMessage());
+        }
+
     }
 
     public List<Agendamento> findAll(){
@@ -42,17 +62,30 @@ public class AgendamentoService {
         agendamento.setStatus(StatusAgendamento.CANCELADO);
         return repo.save(agendamento);
     }
-    public AgendamentoDTO solicitarAgendamento(AgendamentoDTO agendamentoDTO){
+    public AgendamentoDTO solicitarAgendamento(AgendamentoDTO agendamentoDTO) {
         Agendamento agendamento = new Agendamento();
         agendamento.setHora(agendamentoDTO.getHora());
         agendamento.setStatus(StatusAgendamento.PENDENTE);
 
+        Usuario usuario = usuarioRepository.findById(agendamentoDTO.getUsuario().getId())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        agendamento.setUsuario(usuario);
+
+        Barbeiro barbeiro = barbeiroRepository.findById(agendamentoDTO.getBarbeiro().getId())
+                .orElseThrow(() -> new RuntimeException("Barbeiro não encontrado"));
+        agendamento.setBarbeiro(barbeiro);
+
+        Servico servico = servicoRepository.findById(agendamentoDTO.getServico().getIdServico())
+                .orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
+        agendamento.setServico(servico);
+
         Agendamento novoAgendamento = repo.save(agendamento);
-        return new AgendamentoDTO();
+        return new AgendamentoDTO(novoAgendamento);
     }
     public List<AgendamentoDTO> listarAgendamentosPendentes(String idBarbeiro){
         List<Agendamento> agendamentos = repo.findByBarbeiroIdAndStatus(idBarbeiro, StatusAgendamento.PENDENTE);
-        System.out.println("Agendamentos pendentes: " + agendamentos); // Adicione isso
+        System.out.println("Agendamentos pendentes: " + agendamentos);
         return agendamentos.stream().map(AgendamentoDTO::new).collect(Collectors.toList());
     }
+
 }

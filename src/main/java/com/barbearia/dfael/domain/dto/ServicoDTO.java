@@ -9,6 +9,9 @@ public class ServicoDTO {
     private Integer duracao;
     private Double preco;
 
+    public ServicoDTO(){
+
+    }
     public ServicoDTO(Servico obj) {
         idServico = obj.getIdServico();
         nomeServico = obj.getNomeServico();
@@ -16,6 +19,14 @@ public class ServicoDTO {
         preco = obj.getPreco();
     }
 
+    public Servico toEntity(){
+        Servico servico = new Servico();
+        servico.setIdServico(this.idServico); // Verifique se `this.idServico` não é nulo
+        servico.setNomeServico(this.nomeServico); // Verifique se `this.nomeServico` não é nulo
+        servico.setDuracao(this.duracao); // Verifique se `this.duracao` não é nulo
+        servico.setPreco(this.preco); // Verifique se `this.preco` não é nulo
+        return servico;
+    }
     public Long getIdServico() {
         return idServico;
     }

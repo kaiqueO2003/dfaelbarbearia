@@ -5,15 +5,20 @@ import com.barbearia.dfael.domain.Barbeiro;
 import com.barbearia.dfael.domain.Servico;
 import com.barbearia.dfael.domain.Usuario;
 import com.barbearia.dfael.domain.enums.StatusAgendamento;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
 public class AgendamentoDTO {
     private Long idAgendamento;
+    @NotNull(message = "Hora do agendamento é obrigatória")
     private Date hora;
     private StatusAgendamento statusAgendamento;
+    @NotNull(message = "Usuario nao pode ser nulo")
     private UsuarioDTO usuario;
+    @NotNull(message = "Barbeiro nao pode ser nulo")
     private BarbeiroDTO barbeiro;
+    @NotNull(message = "Serviço nao pode ser nulo")
     private ServicoDTO servico;
 
 
@@ -22,15 +27,16 @@ public class AgendamentoDTO {
     }
 
     public AgendamentoDTO(Agendamento obj) {
-        idAgendamento = obj.getIdAgendamento();
-        hora = obj.getHora();
-        statusAgendamento = obj.getStatus();
-        this.usuario = (obj.getUsuario() != null) ? new UsuarioDTO(obj.getUsuario()) : null;
-        this.barbeiro = (obj.getBarbeiro() != null) ? new BarbeiroDTO(obj.getBarbeiro()) : null;
-        this.servico = (obj.getServico() != null) ? new ServicoDTO(obj.getServico()) : null;
+
+            idAgendamento = obj.getIdAgendamento();
+            hora = obj.getHora();
+            statusAgendamento = obj.getStatus();
+            this.usuario = new UsuarioDTO(obj.getUsuario()); // Use 'obj' para acessar os dados
+            this.barbeiro = new BarbeiroDTO(obj.getBarbeiro()); // Use 'obj' para acessar os dados
+            this.servico = new ServicoDTO(obj.getServico()); // Use 'obj' para acessar os dados
+
 
     }
-
     public Long getIdAgendamento() {
         return idAgendamento;
     }

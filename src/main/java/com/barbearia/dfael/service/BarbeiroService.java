@@ -32,7 +32,6 @@ public class BarbeiroService {
         updateData(newObj, obj);
         return repo.save(newObj);
     }
-
     private void updateData(Barbeiro newObj, Barbeiro obj) {
         newObj.setName(obj.getName());
         newObj.setEmail(obj.getEmail());

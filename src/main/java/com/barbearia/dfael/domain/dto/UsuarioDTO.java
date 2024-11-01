@@ -19,6 +19,13 @@ import com.barbearia.dfael.domain.Usuario;
             name = obj.getName();
             email = obj.getEmail();
         }
+        public Usuario toEntity() {
+            Usuario usuario = new Usuario();
+            usuario.setId(this.id); // Verifique se `this.id` não é nulo
+            usuario.setName(this.name); // Verifique se `this.name` não é nulo
+            usuario.setEmail(this.email); // Verifique se `this.email` não é nulo
+            return usuario;
+        }
 
         public String getId() {
             return id;

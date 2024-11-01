@@ -38,6 +38,7 @@ public class BarbeiroController {
         return ResponseEntity.noContent().build();
     }
 
+
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@RequestBody BarbeiroDTO objDto, @PathVariable String id){
         Barbeiro obj = service.fromDTO(objDto);

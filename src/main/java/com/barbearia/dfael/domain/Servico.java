@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
+@Table(name = "servicos")
 public class Servico implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,8 +17,8 @@ public class Servico implements Serializable {
     private Integer duracao;
     private Double preco;
 
-    @OneToMany(mappedBy = "servico", cascade = CascadeType.ALL, fetch = FetchType.LAZY)  // Adicionado fetch e cascade
-    private List<Agendamento> agendamentos;
+    @OneToMany(mappedBy = "servico")
+    private Set<Agendamento> agendamentos;
 
 
     public Servico(){

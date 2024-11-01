@@ -38,6 +38,12 @@ public class Usuario implements UserDetails {
     public Usuario(){
 
     }
+    public Usuario(String id, String name, String telefone, String email) {
+        this.id = id;
+        this.name = name;
+        this.telefone = telefone;
+        this.email = email;
+    }
 
     public Usuario(String id, String name, String telefone, String email, String password, UsuarioRole role) {
         this.id = id;
@@ -48,14 +54,9 @@ public class Usuario implements UserDetails {
         this.role = role;
     }
 
+
     public Usuario(String id, String name, String email, String password, UsuarioRole role) {
         this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-    public Usuario(String name, String email, String password, UsuarioRole role) {this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -65,6 +66,9 @@ public class Usuario implements UserDetails {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+
+    public Usuario(String name, String email, String enccryptedPassword, UsuarioRole role) {
     }
 
 

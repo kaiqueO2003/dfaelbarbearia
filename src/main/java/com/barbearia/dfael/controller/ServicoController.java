@@ -23,7 +23,7 @@ public class ServicoController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Servico> findById(@PathVariable String id){
+    public ResponseEntity<Servico> findById(@PathVariable Long id){
         Servico obj = service.findByid(id);
         return ResponseEntity.ok().body(obj);
     }
