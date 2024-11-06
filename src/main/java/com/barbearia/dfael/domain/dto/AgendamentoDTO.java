@@ -1,9 +1,6 @@
 package com.barbearia.dfael.domain.dto;
 
 import com.barbearia.dfael.domain.Agendamento;
-import com.barbearia.dfael.domain.Barbeiro;
-import com.barbearia.dfael.domain.Servico;
-import com.barbearia.dfael.domain.Usuario;
 import com.barbearia.dfael.domain.enums.StatusAgendamento;
 import jakarta.validation.constraints.NotNull;
 
@@ -21,7 +18,6 @@ public class AgendamentoDTO {
     @NotNull(message = "Serviço nao pode ser nulo")
     private ServicoDTO servico;
 
-
     public AgendamentoDTO(){
 
     }
@@ -31,9 +27,9 @@ public class AgendamentoDTO {
             idAgendamento = obj.getIdAgendamento();
             hora = obj.getHora();
             statusAgendamento = obj.getStatus();
-            this.usuario = new UsuarioDTO(obj.getUsuario()); // Use 'obj' para acessar os dados
-            this.barbeiro = new BarbeiroDTO(obj.getBarbeiro()); // Use 'obj' para acessar os dados
-            this.servico = new ServicoDTO(obj.getServico()); // Use 'obj' para acessar os dados
+            this.usuario = new UsuarioDTO(obj.getUsuario());
+            this.barbeiro = new BarbeiroDTO(obj.getBarbeiro());
+            this.servico = new ServicoDTO(obj.getServico());
 
 
     }

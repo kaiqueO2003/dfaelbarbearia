@@ -15,10 +15,11 @@ public class Agendamento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAgendamento;
-    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private Date hora;
 
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS")
     private StatusAgendamento status;
 
     @ManyToOne
@@ -29,15 +30,9 @@ public class Agendamento implements Serializable {
     @JoinColumn(name = "barbeiro_id")
     private Barbeiro barbeiro;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Pagamento pagamento;
-
     @ManyToOne
     @JoinColumn(name = "servico_id")
     private Servico servico;
-
-
-
 
     public Agendamento(){
 
@@ -104,14 +99,6 @@ public class Agendamento implements Serializable {
 
     public void setBarbeiro(Barbeiro barbeiro) {
         this.barbeiro = barbeiro;
-    }
-
-    public Pagamento getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
     }
 
 

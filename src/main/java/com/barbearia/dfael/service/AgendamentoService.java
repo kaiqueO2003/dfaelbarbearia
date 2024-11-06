@@ -14,8 +14,10 @@ import com.barbearia.dfael.service.exception.ResourceNotFoundException;
 import com.barbearia.dfael.repository.AgendamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,7 +33,8 @@ public class AgendamentoService {
     @Autowired
     BarbeiroRepository barbeiroRepository;
 
-
+    @Autowired
+    NotificacaoService notificacaoService;
 
     public Agendamento insert(Agendamento obj){
         try {
@@ -78,10 +81,30 @@ public class AgendamentoService {
         Servico servico = servicoRepository.findById(agendamentoDTO.getServico().getIdServico())
                 .orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
         agendamento.setServico(servico);
-
         Agendamento novoAgendamento = repo.save(agendamento);
         return new AgendamentoDTO(novoAgendamento);
     }
+    @Scheduled(fixedRate = 60000)
+    public void enviarLembretes() {
+        LocalDateTime agora = LocalDateTime.now();
+        LocalDateTime proximaHora = agora.plusHours(1);
+
+        List<Agendamento> agendamentosConfirmados = repo.findAgendamentosByHoraAndStatus(agora, proximaHora, StatusAgendamento.CONFIRMADO);
+
+        if (agendamentosConfirmados.isEmpty()) {
+            System.out.println("Nenhum agendamento confirmado para enviar lembrete.");
+        } else {
+            for (Agendamento agendamento : agendamentosConfirmados) {
+                String telefone = agendamento.getUsuario().getTelefone();
+                String mensagem = "Lembrete: Você tem um agendamento com o barbeiro " +
+                        agendamento.getBarbeiro().getName() + " às " + agendamento.getHora() + ". Não se atrase!";
+                notificacaoService.enviarNotificacao(telefone, mensagem);
+                System.out.println("Enviando lembrete para: " + telefone);
+            }
+        }
+    }
+
+
     public List<AgendamentoDTO> listarAgendamentosPendentes(String idBarbeiro){
         List<Agendamento> agendamentos = repo.findByBarbeiroIdAndStatus(idBarbeiro, StatusAgendamento.PENDENTE);
         System.out.println("Agendamentos pendentes: " + agendamentos);

@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TwilioService {
 
-    
-    @Autowired
-    NotificacaoRepository notificacaoRepository;
+
 
     public TwilioService() {
         Twilio.init(accountSid, authToken);

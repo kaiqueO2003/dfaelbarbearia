@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -28,15 +28,28 @@ public class Usuario implements UserDetails {
     private List<Agendamento> agendamentos;
 
     @OneToMany(mappedBy = "usuario")
-    private List<HistoricoAgendamento> historicoAgendamentos;
-
-    @OneToMany(mappedBy = "usuario")
     private List<Notificacao> notificacaos;
 
 
 
     public Usuario(){
 
+    }
+    public Usuario(String name, String email, String password, String telefone, UsuarioRole role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.telefone = telefone;
+        this.role = role;
+    }
+
+
+
+    public Usuario(String name, String email, String password, UsuarioRole role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
     }
     public Usuario(String id, String name, String telefone, String email) {
         this.id = id;
@@ -45,30 +58,19 @@ public class Usuario implements UserDetails {
         this.email = email;
     }
 
-    public Usuario(String id, String name, String telefone, String email, String password, UsuarioRole role) {
+
+    public Usuario(String id, String name, String email, String password, String telefone, UsuarioRole role) {
         this.id = id;
         this.name = name;
+        this.email = email;
+        this.password = password;
         this.telefone = telefone;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-
-
-    public Usuario(String id, String name, String email, String password, UsuarioRole role) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
         this.role = role;
     }
     public Usuario(String id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
-    }
-
-    public Usuario(String name, String email, String enccryptedPassword, UsuarioRole role) {
     }
 
 

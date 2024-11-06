@@ -47,7 +47,7 @@ public class AgendamentoController {
         obj = service.insert(obj);
         return ResponseEntity.ok().body(obj);
     }
-    @PutMapping("/confirmar/{id}")
+    @PutMapping("/barbeiro/{barbeiroId}/confirmar/{id}")
     public ResponseEntity<AgendamentoDTO> confirmarAgendamento(@PathVariable String id) {
         Agendamento agendamentoConfirmado = service.confirmarAgendamento(id);
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamentoConfirmado);
@@ -68,7 +68,7 @@ public class AgendamentoController {
         return ResponseEntity.ok().body(agendamentoDTO);
     }
 
-    @PutMapping("/solicitar")
+    @PostMapping ("/solicitar")
     public ResponseEntity<AgendamentoDTO> solicitarAgendamento(@RequestBody AgendamentoDTO agendamentoDTO) {
         AgendamentoDTO novoAgendamento = service.solicitarAgendamento(agendamentoDTO);
         return ResponseEntity.ok(novoAgendamento);

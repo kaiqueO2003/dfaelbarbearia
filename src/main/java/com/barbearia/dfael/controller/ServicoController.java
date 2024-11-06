@@ -1,12 +1,9 @@
 package com.barbearia.dfael.controller;
 
-import com.barbearia.dfael.domain.Agendamento;
 import com.barbearia.dfael.domain.Servico;
-import com.barbearia.dfael.service.AgendamentoService;
 import com.barbearia.dfael.service.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

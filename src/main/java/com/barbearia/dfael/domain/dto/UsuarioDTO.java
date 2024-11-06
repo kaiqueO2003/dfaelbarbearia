@@ -6,6 +6,7 @@ import com.barbearia.dfael.domain.Usuario;
     public class UsuarioDTO {
     private String id;
     private String name;
+    private String telefone;
     private String email;
 
 
@@ -18,14 +19,9 @@ import com.barbearia.dfael.domain.Usuario;
             id = obj.getId();
             name = obj.getName();
             email = obj.getEmail();
+            telefone = obj.getTelefone();
         }
-        public Usuario toEntity() {
-            Usuario usuario = new Usuario();
-            usuario.setId(this.id); // Verifique se `this.id` não é nulo
-            usuario.setName(this.name); // Verifique se `this.name` não é nulo
-            usuario.setEmail(this.email); // Verifique se `this.email` não é nulo
-            return usuario;
-        }
+
 
         public String getId() {
             return id;
@@ -51,6 +47,11 @@ import com.barbearia.dfael.domain.Usuario;
             this.email = email;
         }
 
+        public String getTelefone() {
+            return telefone;
+        }
 
-
+        public void setTelefone(String telefone) {
+            this.telefone = telefone;
+        }
     }

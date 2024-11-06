@@ -1,9 +1,7 @@
 package com.barbearia.dfael.service;
 
 import com.barbearia.dfael.domain.Barbeiro;
-import com.barbearia.dfael.domain.Usuario;
 import com.barbearia.dfael.domain.dto.BarbeiroDTO;
-import com.barbearia.dfael.domain.dto.UsuarioDTO;
 import com.barbearia.dfael.repository.BarbeiroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

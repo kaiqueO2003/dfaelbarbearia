@@ -35,18 +35,18 @@ public class  Instantion implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-        Usuario kaique = new Usuario(null, "Kaique", "+5511951411178", "kaique@gmail.com", "123", ADMIN);
-        Usuario ana = new Usuario(null, "Ana", "11951411178", "ana@gmail.com", "123", USUARIO);
-        Usuario kaio = new Usuario(null, "Kaio", "+5511951411178", "kaio@gmail.com", "123", USUARIO);
+
+        Usuario kaique = new Usuario(null, "Kaique", "kaique@gmail.com","123", "+5511951411178",  ADMIN);
+        Usuario ana = new Usuario(null, "Ana", "ana@gmail.com", "123","11951411178", USUARIO);
+        Usuario kaio = new Usuario(null, "Kaio","kaio@gmail.com","123", "+5511951411178", USUARIO);
 
 
         usuarioRepository.saveAll(Arrays.asList(kaique, ana, kaio));
 
-        Barbeiro ryan = new Barbeiro(null, "Ryan", "ryan@gmail.com", "123", BARBEIRO, "barba e cabelo", "qualquer horario", 5.0);
-        Barbeiro lucas = new Barbeiro(null, "Lucas", "lucas@gmail.com", "123", BARBEIRO, "barba", "qualquer horario", 5.0);
+        Barbeiro ryan = new Barbeiro(null, "Ryan", "ryan@gmail.com", "123", "11912345678", BARBEIRO, "barba e cabelo", "qualquer horario", 5.0);
+        Barbeiro lucas = new Barbeiro(null, "Lucas", "lucas@gmail.com", "123", "11912345678", BARBEIRO, "barba", "qualquer horario", 5.0);
 
         barbeiroRepository.saveAll(Arrays.asList(ryan, lucas));
 
@@ -54,8 +54,8 @@ public class  Instantion implements CommandLineRunner {
         Servico barba = new Servico(null, "barba", 30, 40.00);
         servicoRepository.saveAll(Arrays.asList(cabelo, barba));
 
-        Agendamento agendamento1 = new Agendamento(null, kaique, ryan, cabelo, Date.from(Instant.now()), StatusAgendamento.PENDENTE);
-        Agendamento agendamento2 = new Agendamento(null, ana, lucas, cabelo, Date.from(Instant.now()), StatusAgendamento.PENDENTE);
+        Agendamento agendamento1 = new Agendamento(null, kaique, ryan, cabelo, sdf.parse("05/11/2024 13:50"), StatusAgendamento.PENDENTE);
+        Agendamento agendamento2 = new Agendamento(null, kaique, lucas, cabelo, sdf.parse("05/11/2024 13:49"), StatusAgendamento.PENDENTE);
         Agendamento agendamento3 = new Agendamento(null, kaio, lucas, barba, Date.from(Instant.now()), StatusAgendamento.PENDENTE);
 
 

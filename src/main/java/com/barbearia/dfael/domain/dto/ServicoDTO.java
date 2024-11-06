@@ -1,6 +1,6 @@
 package com.barbearia.dfael.domain.dto;
 
-import com.barbearia.dfael.domain.Barbeiro;
+
 import com.barbearia.dfael.domain.Servico;
 
 public class ServicoDTO {
@@ -21,10 +21,10 @@ public class ServicoDTO {
 
     public Servico toEntity(){
         Servico servico = new Servico();
-        servico.setIdServico(this.idServico); // Verifique se `this.idServico` não é nulo
-        servico.setNomeServico(this.nomeServico); // Verifique se `this.nomeServico` não é nulo
-        servico.setDuracao(this.duracao); // Verifique se `this.duracao` não é nulo
-        servico.setPreco(this.preco); // Verifique se `this.preco` não é nulo
+        servico.setIdServico(this.idServico);
+        servico.setNomeServico(this.nomeServico);
+        servico.setDuracao(this.duracao);
+        servico.setPreco(this.preco);
         return servico;
     }
     public Long getIdServico() {
